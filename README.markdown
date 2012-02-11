@@ -37,7 +37,8 @@ If you work in the `MANUAL` mode, you have to define all class paths in the `ini
 If you like to set paths after initializing Bazinga, than make use of the `setPath()` method.  
 It accepts single path patterns as a string or multiple in an array.  
 
-To trigger the loading process, simply call the `load()` method. This can be done by using the Scope Operator or Method Chaining.
+To trigger the loading process, simply call the `load()` method.  
+This can be done by using the Scope Operator or Method Chaining.
 
 ```php
 <?php
@@ -59,8 +60,8 @@ To trigger the loading process, simply call the `load()` method. This can be don
 ### Path patterns ###
 
 The universal selector `*` allows you to select all files in a folder:  
-`foo/*.php` will select all PHP files in the directory `foo/`  
-`foo/*/bar.php` will search in all subfolders of `foo/` for files named `bar.php`
+- `foo/*.php` will select all PHP files in the directory `foo/`  
+- `foo/*/bar.php` will search in all subfolders of `foo/` for files named `bar.php`
 
 ## Config ##
 
