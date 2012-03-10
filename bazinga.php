@@ -7,7 +7,7 @@
  * @author Christian Metz
  * @since 3.01.2012
  * @copyright Christian Metz - MetzWeb Networks
- * @version 1.0
+ * @version 1.1
  * @license BSD http://www.opensource.org/licenses/bsd-license.php
  */
 
@@ -35,11 +35,18 @@ class Bazinga {
   private static $_modes = array('AUTO', 'MANUAL');
 
   /**
-   * Basic path (required for spl autoload)
+   * Basic path
    * 
    * @var string
    */
   private static $_basicPath = null;
+
+  /**
+   * Autoload path (required for spl autoload)
+   * 
+   * @var string
+   */
+  private static $_autoPath = null;
 
   /**
    * Initialization
@@ -49,7 +56,8 @@ class Bazinga {
    */
   public static function init($config = null) {
     if (is_array($config) && !empty($config)) {
-      if (isset($config['config'])) {        
+      if (isset($config['config'])) {     
+        self::$_basicPath = realpath(dirname(__FILE__)) . '/';   
         if (isset($config['config']['mode']) && in_array($config['config']['mode'], self::$_modes)) {
           if ($config['config']['mode'] === 'AUTO') {
             self::_register($config['config']['path']);
@@ -86,9 +94,13 @@ class Bazinga {
   public static function load() {
     if (!empty(self::$_paths)) {
       foreach(self::$_paths as $path) {
-        foreach(glob($path) as $filepath) {
-          require_once $filepath;
-      	}
+        if (!strpos($path, '*')) {
+          require_once(self::$_basicPath . $path);
+        } else {
+          foreach(glob($path) as $filepath) {
+            require_once(self::$_basicPath . $filepath);
+        	}
+        }
       }
     }
   }
@@ -112,9 +124,9 @@ class Bazinga {
    * @return void
    */
   private static function _autoload($class) {
-    $filepath = self::$_basicPath.strtolower($class).'.php';
+    $filepath = self::$_autoPath . $class . '.php';
     if (file_exists($filepath)) {
-      require_once $filepath;
+      require_once($filepath);
     }
   }
 
@@ -124,11 +136,11 @@ class Bazinga {
    * @param string $path
    * @return void
    */
-  private static function _checkBasicPath($path) {
+  private static function _checkAutoPath($path) {
     if (!isset($path)) {
-      self::$_basicPath = dirname(__FILE__).'/';
+      self::$_autoPath = self::$_basicPath;
     } else {
-      self::$_basicPath = $path;
+      self::$_autoPath = self::$_basicPath . $path;
     }
   }
 
@@ -139,8 +151,8 @@ class Bazinga {
    * @return void
    */
   private static function _register($path) {
-    self::_checkBasicPath($path);
-    spl_autoload_register(array(self, '_autoload'));
+    self::_checkAutoPath($path);
+    spl_autoload_register('Bazinga::_autoload');
   }
 
 }

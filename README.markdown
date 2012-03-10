@@ -12,7 +12,7 @@ Your feedback is always welcome.
 
 ## Quick Start ##
 
-First include the Bazinga class: `require 'bazinga.php';`
+First include the Bazinga class: `require 'Bazinga.php';`
 
 ```php
 <?php
@@ -63,6 +63,8 @@ The universal selector `*` allows you to select all files in a folder:
 - `foo/*.php` will select all PHP files in the directory `foo/`  
 - `foo/*/bar.php` will search in all subfolders of `foo/` for files named `bar.php`
 
+Of course it's also possible to define static file paths like: `path/to/file.php`
+
 ## Config ##
 
 The whole configuration of Bazinga is done by the config array.
@@ -77,6 +79,14 @@ The whole configuration of Bazinga is done by the config array.
 Please submit issues through the [issue tracker](https://github.com/cosenary/Bazinga/issues) on GitHub. Your help is appreciated.
 
 ## History ##
+
+**Bazinga 1.1 - 10/03/2012**
+
+- `release` Second alpha version
+- `feature` Now you can define static file paths
+- `feature` Added `dirname` absolute directory path
+- `change` Removed `strtolower` function 
+- `bug` Autoloader static class bug
 
 **Bazinga 1.0 - 06/01/2012**
 
@@ -94,5 +104,5 @@ Please submit issues through the [issue tracker](https://github.com/cosenary/Baz
 
 ## Credits ##
 
-Copyright (c) 2012 - Programmed by Christian Metz / [@cosenary](http://twitter.com/cosenary)  
+Copyright (c) 2012 - Programmed by Christian Metz  
 Released under the [BSD License](http://www.opensource.org/licenses/bsd-license.php).
