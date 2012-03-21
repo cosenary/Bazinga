@@ -2,12 +2,12 @@
 
 /**
  * Bazinga bootstrap class
- * Class Documentation:
+ * Class Documentation: https://github.com/cosenary/Bazinga
  * 
  * @author Christian Metz
  * @since 3.01.2012
  * @copyright Christian Metz - MetzWeb Networks
- * @version 1.1
+ * @version 1.2
  * @license BSD http://www.opensource.org/licenses/bsd-license.php
  */
 
@@ -47,6 +47,16 @@ class Bazinga {
    * @var string
    */
   private static $_autoPath = null;
+
+  /**
+   * Valid class types and their dir paths
+   * 
+   * @var array
+   */
+  private static $_classTypes = array(
+    'controller' => 'controllers/',
+    'model'      => 'models/'
+  );
 
   /**
    * Initialization
@@ -99,7 +109,7 @@ class Bazinga {
         } else {
           foreach(glob($path) as $filepath) {
             require_once(self::$_basicPath . $filepath);
-        	}
+          }
         }
       }
     }
@@ -124,7 +134,13 @@ class Bazinga {
    * @return void
    */
   private static function _autoload($class) {
-    $filepath = self::$_autoPath . $class . '.php';
+    $classType = strtolower(end(preg_split('/(?<=\\w)(?=[A-Z])/', $class)));
+    if (isset(self::$_classTypes[$classType])) {
+      $filepath = self::$_basicPath . self::$_classTypes[$classType];
+    } else {
+      $filepath = self::$_autoPath;
+    }
+    $filepath = $filepath . $class . '.php';
     if (file_exists($filepath)) {
       require_once($filepath);
     }

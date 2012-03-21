@@ -65,6 +65,12 @@ The universal selector `*` allows you to select all files in a folder:
 
 Of course it's also possible to define static file paths like: `path/to/file.php`
 
+### MVC feature ###
+
+Bazinga has the ability to load classes according to the detected MVC class type.  
+For example a class with the name `MainController` will be loaded from the directory `controllers/`.  
+At the moment it's only possible to change the default directory names in the Bazinga class `array $_classTypes`.
+
 ## Config ##
 
 The whole configuration of Bazinga is done by the config array.
@@ -79,6 +85,11 @@ The whole configuration of Bazinga is done by the config array.
 Please submit issues through the [issue tracker](https://github.com/cosenary/Bazinga/issues) on GitHub. Your help is appreciated.
 
 ## History ##
+
+**Bazinga 1.2 - 24/03/2012**
+
+- `release` Dev branch version (Beta)
+- `feature` MVC Class autodetection
 
 **Bazinga 1.1 - 10/03/2012**
 
