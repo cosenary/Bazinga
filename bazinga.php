@@ -7,7 +7,7 @@
  * @author Christian Metz
  * @since 3.01.2012
  * @copyright Christian Metz - MetzWeb Networks
- * @version 1.2
+ * @version 1.3
  * @license BSD http://www.opensource.org/licenses/bsd-license.php
  */
 
@@ -66,8 +66,8 @@ class Bazinga {
    */
   public static function init($config = null) {
     if (is_array($config) && !empty($config)) {
-      if (isset($config['config'])) {     
-        self::$_basicPath = realpath(dirname(__FILE__)) . '/';   
+      if (isset($config['config'])) {
+        self::$_basicPath = realpath(dirname(__FILE__)) . '/';
         if (isset($config['config']['mode']) && in_array($config['config']['mode'], self::$_modes)) {
           if ($config['config']['mode'] === 'AUTO') {
             self::_register($config['config']['path']);
@@ -134,7 +134,8 @@ class Bazinga {
    * @return void
    */
   private static function _autoload($class) {
-    $classType = strtolower(end(preg_split('/(?<=\\w)(?=[A-Z])/', $class)));
+    $className = preg_split('/(?<=\\w)(?=[A-Z])/', $class);
+    $classType = strtolower(end($className));
     if (isset(self::$_classTypes[$classType])) {
       $filepath = self::$_basicPath . self::$_classTypes[$classType];
     } else {

@@ -53,6 +53,7 @@ This can be done by using the Scope Operator or Method Chaining.
       'scripts/*/foo.php',
       'bar.php'
     ));
+    
     Bazinga::load();
 ?>
 ```
@@ -67,9 +68,20 @@ Of course it's also possible to define static file paths like: `path/to/file.php
 
 ### MVC feature ###
 
-Bazinga has the ability to load classes according to the detected MVC class type.  
+Bazinga has the ability to load classes according the detected MVC class type.  
 For example a class with the name `MainController` will be loaded from the directory `controllers/`.  
-At the moment it's only possible to change the default directory names in the Bazinga class `array $_classTypes`.
+Bazinga lives in the `application` folder from which it all loads the required files.
+
+    /application
+        Bazinga.php
+        
+        /classes
+        
+        /controllers
+        
+        /models
+
+> At the moment it's only possible to change the default directory names in the Bazinga class array `$_classTypes`.
 
 ## Config ##
 
@@ -85,6 +97,11 @@ The whole configuration of Bazinga is done by the config array.
 Please submit issues through the [issue tracker](https://github.com/cosenary/Bazinga/issues) on GitHub. Your help is appreciated.
 
 ## History ##
+
+**Bazinga 1.3 - 18/06/2012**
+
+- `release` Dev branch version
+- `bug` Fixed `Strict Standard` error
 
 **Bazinga 1.2 - 24/03/2012**
 
